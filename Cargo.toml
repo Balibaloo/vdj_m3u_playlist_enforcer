@@ -1,0 +1,15 @@
+[package]
+name = "vdj_m3u_playlist_enforcer"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.4", features = ["derive"] }
+notify = "6.1"
+quick-xml = "0.30"
+walkdir = "2.3"
+log = "0.4"
+env_logger = "0.10"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"

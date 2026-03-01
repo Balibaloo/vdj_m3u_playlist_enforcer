@@ -1,0 +1,12 @@
+[Unit]
+Description=VirtualDJ m3u playlist enforcer (scan)
+After=network.target
+
+[Service]
+Type=oneshot
+User=vdj-m3u-playlist-enforcer
+ExecStart=/usr/bin/vdj-m3u-playlist-enforcer --config /etc/vdj-m3u-playlist-enforcer/config.toml --once
+WorkingDirectory=/var/lib/vdj-m3u-playlist-enforcer
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+_ensure_user_and_dirs() {
+  local user="vdj-m3u-playlist-enforcer"
+  local group="vdj-m3u-playlist-enforcer"
+
+  if ! getent group "$group" >/dev/null; then
+    groupadd --system "$group" 2>/dev/null || true
+  fi
+
+  if ! getent passwd "$user" >/dev/null; then
+    useradd --system --no-create-home \
+      --shell /usr/bin/nologin \
+      --gid "$group" \
+      --home-dir /var/lib/vdj-m3u-playlist-enforcer \
+      "$user" 2>/dev/null || true
+  fi
+
+  mkdir -p /etc/vdj-m3u-playlist-enforcer
+  mkdir -p /var/lib/vdj-m3u-playlist-enforcer
+  mkdir -p /var/log/vdj-m3u-playlist-enforcer
+
+  if [ ! -f /etc/vdj-m3u-playlist-enforcer/config.toml ] && [ -f /etc/vdj-m3u-playlist-enforcer/example-config.toml ]; then
+    cp /etc/vdj-m3u-playlist-enforcer/example-config.toml /etc/vdj-m3u-playlist-enforcer/config.toml
+  fi
+
+  chown -R "$user":"$group" /etc/vdj-m3u-playlist-enforcer /var/lib/vdj-m3u-playlist-enforcer /var/log/vdj-m3u-playlist-enforcer 2>/dev/null || true
+  chmod 755 /etc/vdj-m3u-playlist-enforcer /var/lib/vdj-m3u-playlist-enforcer /var/log/vdj-m3u-playlist-enforcer 2>/dev/null || true
+  chmod 444 /etc/vdj-m3u-playlist-enforcer/config.toml 2>/dev/null || true
+}
+
+post_install() {
+  _ensure_user_and_dirs
+}
+
+post_upgrade() {
+  _ensure_user_and_dirs
+}

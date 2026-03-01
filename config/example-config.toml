@@ -1,0 +1,5 @@
+# Root folder that contains the VirtualDJ playlist descriptors.
+root_folder = "/path/to/VirtualDJ/Playlists"
+
+# The service runs as the "vdj-m3u-playlist-enforcer" user, so ensure that
+# user has read/write access to `root_folder` (e.g. via group permissions or ACLs).
