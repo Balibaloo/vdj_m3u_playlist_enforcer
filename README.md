@@ -2,6 +2,10 @@
 
 This CLI watches for VirtualDJ `.vdjfolder` playlist descriptors, converts each to a one-to-one `.m3u` playlist, and removes the original descriptor so VirtualDJ can be pointed at the generated files.
 
+After creating a playlist, **YOU MUST COLLAPSE AND RE-EXPAND THE PARENT FOLDER OF THE PLAYLIST BEFORE ADDING TRACKS**
+
+This instantly converts the playlist to an m3u list that is directly compatible within VirtualDJ
+
 ## Running locally
 
 ```sh
